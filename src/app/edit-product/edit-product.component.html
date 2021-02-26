@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">Edition du produit</div>
+    <div class="panel-body" *ngIf="currentProduct">
+      <form #f="ngForm" (ngSubmit)="onUpdateProduct(f.value)">
+        <div class="form-group">
+          <label class="control-label">Désignation</label>
+          <input class="form-control" type="text" name="designation" ngModel [(ngModel)]="currentProduct.designation">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Quantité</label>
+          <input class="form-control" type="number" name="quantite" ngModel [(ngModel)]="currentProduct.quantite">
+        </div>
+        <div *ngIf="Listcategories" class="form-group">
+          <label class="control-label">Category:</label>
+          <select  name="category" ngModel   class="form-control"  >
+            <option  *ngFor="let categ of Listcategories._embedded.categories" [ngValue]='categ._links.self.href' >{{categ.name}}</option>
+            <!-- "http://localhost:8080/categories/"+categ.id -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Prix</label>
+          <input class="form-control" type="text" name="price" ngModel [(ngModel)]="currentProduct.price">
+        </div>
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+</div>
